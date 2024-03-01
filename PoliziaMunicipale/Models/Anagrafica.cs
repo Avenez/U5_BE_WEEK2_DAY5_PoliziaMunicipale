@@ -97,6 +97,7 @@ namespace PoliziaMunicipale.Models
         }
 
         //metodo che sottrae i punti di un verbale alla persona indicata tramite id quando si crea un verbale
+        //Non elimina punti sotto lo zero. Quando i punti non bastano porta questi a zero
         public static void SottraiPunti(int idAnagrafica, int puntiDaSottrarre)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["connectionStringDb"].ToString();
@@ -104,8 +105,7 @@ namespace PoliziaMunicipale.Models
             {
                 try
                 {
-                    conn.Open();
-                    //SqlCommand cmd = new SqlCommand("UPDATE ANAGRAFICA SET Punti = Punti - @PuntiDaSottrarre WHERE IdAnagrafica = @IdAnagrafica", conn);
+                    conn.Open();  
                     SqlCommand cmd = new SqlCommand("UPDATE ANAGRAFICA SET Punti = CASE WHEN Punti >= @PuntiDaSottrarre THEN Punti - @PuntiDaSottrarre ELSE 0 END WHERE IdAnagrafica = @IdAnagrafica", conn);
                     cmd.Parameters.AddWithValue("@PuntiDaSottrarre", puntiDaSottrarre);
                     cmd.Parameters.AddWithValue("@IdAnagrafica", idAnagrafica);
