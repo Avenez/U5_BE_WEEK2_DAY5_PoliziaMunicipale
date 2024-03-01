@@ -69,22 +69,35 @@ public class TipoViolazione
             string query = "SELECT * FROM TIPO_VIOLAZIONE";
 
             SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
 
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            try 
             {
-                TipoViolazione tipoViolazione = new TipoViolazione
+                conn.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    IdViolazione = Convert.ToInt32(reader["idviolazione"]),
-                    Descrizione = reader["descrizione"].ToString(),
-                    Contestabile = reader.GetBoolean(reader.GetOrdinal("Contestabile"))
-                };
-                tipoViolazioni.Add(tipoViolazione);
+                    TipoViolazione tipoViolazione = new TipoViolazione
+                    {
+                        IdViolazione = Convert.ToInt32(reader["idviolazione"]),
+                        Descrizione = reader["descrizione"].ToString(),
+                        Contestabile = reader.GetBoolean(reader.GetOrdinal("Contestabile"))
+                    };
+                    tipoViolazioni.Add(tipoViolazione);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                conn.Close();
             }
 
-            reader.Close();
         }
 
         return tipoViolazioni;

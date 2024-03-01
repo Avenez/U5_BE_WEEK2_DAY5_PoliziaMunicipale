@@ -121,6 +121,10 @@ namespace PoliziaMunicipale.Models
                 {
                     Console.WriteLine($"Si è verificato un errore: {ex.Message}");
                 }
+                finally
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -159,6 +163,10 @@ namespace PoliziaMunicipale.Models
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Si è verificato un errore: {ex.Message}");
+                }
+                finally
+                {
+                    conn.Close();
                 }
             }
 
