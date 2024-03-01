@@ -9,6 +9,7 @@ namespace PoliziaMunicipale.Controllers
 {
     public class HomeController : Controller
     {
+        //Controllo la presenza di una session["Inserimento"] ed il suo valore che uso per inviare bool alla View Index e visualizzare in maniera dinamica il feedback per l'Utente
         public ActionResult Index()
         {
             if (Session["inserimento"] == null) 
@@ -46,6 +47,7 @@ namespace PoliziaMunicipale.Controllers
             return View();
         }
 
+        //metodo per la visualizzazione delle richieste relative agli elenchi
         public ActionResult RecuperoDati() 
         {
             return View();

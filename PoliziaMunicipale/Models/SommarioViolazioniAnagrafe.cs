@@ -65,6 +65,9 @@ namespace PoliziaMunicipale.Models
         }
 
 
+        //Metodo per la richiesta relativa all'ottenimeto del numero di verbali raggruppati per anagrafe
+        //Seleziona i campi dal DB e joina i risultati attraverso le chiavi IdAnagrafica
+        //Crea una lista dei record e la restituisce
         public static List<SommarioViolazioniAnagrafe> GetSommarioViolazioniAnagrafe(int order)
         {
             List<SommarioViolazioniAnagrafe> sommarioList = new List<SommarioViolazioniAnagrafe>();
@@ -109,6 +112,9 @@ namespace PoliziaMunicipale.Models
             return sommarioList;
         }
 
+        //Metodo per la richiesta relativa all'ottenimeto del numero punti sottratti raggruppati per anagrafe
+        //Seleziona i campi dal DB e joina i risultati attraverso le chiavi IdAnagrafica
+        //Crea una lista dei record e la restituisce
         public static List<SommarioViolazioniAnagrafe> GetSommarioPuntiAnagrafe(int order)
         {
             List<SommarioViolazioniAnagrafe> sommarioList = new List<SommarioViolazioniAnagrafe>();
@@ -165,7 +171,9 @@ namespace PoliziaMunicipale.Models
             return sommarioList;
         }
 
-
+        //Metodo che restituisce i valori relativi alla richiesta di tutti i verbali che superano un certo numero di punti decurtati
+        //Il metodo prevede due parametri per il filtraggio dei record in modo da essere magigormente dinamico
+        //Crea una lista dei record e la restituisce
         public static List<SommarioViolazioniAnagrafe> GetSommarioAnagrafe(int type, int punti)
         {
             List<SommarioViolazioniAnagrafe> sommarioList = new List<SommarioViolazioniAnagrafe>();

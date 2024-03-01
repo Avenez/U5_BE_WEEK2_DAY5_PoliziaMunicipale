@@ -30,7 +30,7 @@ public class TipoViolazione
 
 
 
-    // Metodo per inserire un nuovo record nella tabella
+    // Metodo per inserire un nuovo record nella tabella che prende un TipoViolazione e lo inserisce nel DB
     public static void InserisciNuovoTipoViolazione(TipoViolazione nuovoTipoViolazione)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["connectionStringDb"].ToString();
@@ -39,8 +39,9 @@ public class TipoViolazione
         try
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO TIPO_VIOLAZIONE (descrizione) VALUES (@Descrizione)", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO TIPO_VIOLAZIONE (descrizione, contestabile) VALUES (@Descrizione, @Contestabile)", conn);
             cmd.Parameters.AddWithValue("@Descrizione", nuovoTipoViolazione.Descrizione);
+            cmd.Parameters.AddWithValue("@Contestabile", nuovoTipoViolazione.Contestabile);
 
             cmd.ExecuteNonQuery();
 
@@ -56,7 +57,8 @@ public class TipoViolazione
         }
     }
 
-
+    //Metodo che seleziona tutte le violazioni presenti sul DB
+    //Crea una lista di violazioni e la restituisce
     public static List<TipoViolazione> GetTipoViolazioni()
     {
         List<TipoViolazione> tipoViolazioni = new List<TipoViolazione>();

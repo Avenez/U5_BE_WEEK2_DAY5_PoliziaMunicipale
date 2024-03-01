@@ -37,6 +37,7 @@ namespace PoliziaMunicipale.Models
             public DateTime DataTrascrizioneVerbale { get; set; }
 
             [DisplayName("Importo")]
+
             [Required]
             public decimal Importo { get; set; }
 
@@ -71,7 +72,7 @@ namespace PoliziaMunicipale.Models
                 IdViolazione = idViolazione;
             }
 
-            // Metodo per inserire un nuovo record nella tabella
+            // Metodo per inserire un nuovo record nella tabella DB con un parametro che è un Verbale
             public static void InserisciNuovoVerbale(Verbale nuovoVerbale)
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["connectionStringDb"].ToString();
@@ -104,6 +105,10 @@ namespace PoliziaMunicipale.Models
                 }
             }
 
+
+            //Metodo Relativo alla richiesta di selezione di verbali sopra un certo importo.
+            //Il metodo prende un parametro in modo da poter filtrare non solo per 400 ma in funzione dell'inporto desiderato per essere maggiormente dinamico
+            //Crea una lista di verbali e la restituisce
             public static List<Verbale> GetVerbaliConImportoSuperiore(int importoMinimo)
             {
                 List<Verbale> verbaliList = new List<Verbale>();

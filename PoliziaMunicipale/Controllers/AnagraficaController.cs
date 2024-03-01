@@ -21,6 +21,8 @@ namespace PoliziaMunicipale.Controllers
         return View();
         }
 
+        //Richiamo il metodo e inserisco una nuvo anagrafica grazie al metodo inserito nel model
+        //Uso le Session per passare valori sia ad HomeController che alla View Index di Home
         [HttpPost]
         public ActionResult CreateAnagrafica(Anagrafica A)
         {

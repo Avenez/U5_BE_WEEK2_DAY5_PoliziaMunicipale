@@ -48,10 +48,10 @@ namespace PoliziaMunicipale.Models
 
 
 
-        // Costruttore vuoto
+        
         public Anagrafica() { }
 
-        // Costruttore con parametri
+      
         public Anagrafica(int idAnagrafica, string cognome, string nome, string indirizzo, string citta, string cap, string codiceFiscale, int punti)
         {
             IdAnagrafica = idAnagrafica;
@@ -64,6 +64,7 @@ namespace PoliziaMunicipale.Models
             Punti = punti;
         }
 
+        //Metodo per l'inserimento sul DB di una nuova Anagrafica
         public static void InserisciNuovaAnagrafica(Anagrafica nuovaAnagrafica)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["connectionStringDb"].ToString();
@@ -95,6 +96,7 @@ namespace PoliziaMunicipale.Models
             }
         }
 
+        //metodo che sottrae i punti di un verbale alla persona indicata tramite id quando si crea un verbale
         public static void SottraiPunti(int idAnagrafica, int puntiDaSottrarre)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["connectionStringDb"].ToString();
@@ -122,6 +124,7 @@ namespace PoliziaMunicipale.Models
             }
         }
 
+        //Metodo che crea una lista di tutte le angrafiche presenti sul DB e la restituisce
         public static List<Anagrafica> GetAllAnagrafiche()
         {
             List<Anagrafica> anagrafiche = new List<Anagrafica>();
