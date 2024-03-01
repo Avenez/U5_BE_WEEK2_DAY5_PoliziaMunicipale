@@ -199,6 +199,10 @@ namespace PoliziaMunicipale.Models
                             orderBy = "V.DataViolazione";
                             break;
 
+                        case 4:
+                            orderBy = "V.DecurtamentoPunti";
+                            break;
+
                         default:
                             break ;
                     
