@@ -63,27 +63,29 @@
             Contestabile
         </div>
     </div>
-    @foreach (var violazione in Violazioni)
-    {
+    <div class="tableConteiner">
+        @foreach (var violazione in Violazioni)
+        {
 
-        <div class="row mb-3 border-1 border-bottom ">
-            <div class="col">
-                @violazione.IdViolazione
+            <div class="row p-2 ">
+                <div class="col">
+                    @violazione.IdViolazione
+                </div>
+                <div class="col">
+                    @violazione.Descrizione
+                </div>
+                <div class="col">
+                    <input type="checkbox" name="checkbox" value="" @((violazione.Contestabile ? "checked" : "")) disabled />
+                </div>
+
             </div>
-            <div class="col">
-                @violazione.Descrizione
-            </div>
-            <div class="col">
-                <input type="checkbox" name="checkbox" value="" @((violazione.Contestabile ? "checked" : "")) disabled />
-            </div>
-
-        </div>
 
 
+        }
+    </div>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
     }
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 

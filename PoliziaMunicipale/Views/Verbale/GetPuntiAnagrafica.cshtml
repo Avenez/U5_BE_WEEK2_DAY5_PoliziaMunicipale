@@ -28,14 +28,16 @@ else
         <div class="col">CF</div>
         <div class="col">Totali Punti</div>
     </div>
-    @foreach (var item in ListaSommarioPunti)
-    {
-        <div class="row mb-3 border-1 border-bottom tableRow">
-            <div class="col">@item.IdAnagrafica</div>
-            <div class="col">@item.Nome</div>
-            <div class="col">@item.Cognome</div>
-            <div class="col">@item.Cod_Fisc</div>
-            <div class="col">@item.NumPunti</div>
-        </div>
-    }
-</div>
+    <div class="tableConteiner">
+        @foreach (var item in ListaSommarioPunti)
+        {
+            <div class="row p-2 tableRow">
+                <div class="col">@item.IdAnagrafica</div>
+                <div class="col">@item.Nome</div>
+                <div class="col">@item.Cognome</div>
+                <div class="col">@item.Cod_Fisc</div>
+                <div class="col">@item.NumPunti</div>
+            </div>
+        }
+    </div>
+    </div>

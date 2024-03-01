@@ -4,55 +4,60 @@
     List<PoliziaMunicipale.Models.SommarioViolazioniAnagrafe> ListaSommarioAnagrafe = ViewBag.ListAnagrafe;
 }
 
-<h2>Sommario Violazioni per Angrafica</h2>
-<div class="row">
-    <div class="col"><h4>Seleziona Ordinamento</h4></div>
-    <div class="col"><h4>Filtro Punti</h4></div>
-    <div class="col"></div>
-</div>
-<div class="row">
-    <div class="col">
-        
-        <select id="tipoSelect">
-            <option value=1>Cognome</option>
-            <option value=2>Importo</option>
-            <option value=3>Data Violazione</option>
-        </select>
+<h2 class="display-4">Sommario Violazioni per Angrafica</h2>
+<div class="border border-2 border-info rounded-2 p-2">
+    <div class="row">
+        <div class="col-3"><h4>Seleziona Ordinamento</h4></div>
+        <div class="col-2"><h4>Filtro Punti</h4></div>
+        <div class="col"></div>
     </div>
-    <div class="col">
-        
-        <input type="number" id="puntiInput" value="0" min="0" />
-    </div>
-    <div class="col">
-        
-        <a href="#" class="btn btn-dark" id="sommarioLink">Ordina</a>
+    <div class="row">
+        <div class="col-3">
 
-    </div>
-
-</div>
-
-<div class="container">
-    <div class="row mt-2 mb-3 fw-bold">
-        <div class="col ">Importo Verbale</div>
-        <div class="col">Cognome</div>
-        <div class="col">Nome</div>
-        <div class="col">Data Violazione</div>
-        <div class="col">Punti Decurtati</div>
-    </div>
-    @foreach (var item in ListaSommarioAnagrafe)
-    {
-        <div class="row mb-2 border-1 border-bottom">
-            <div class="col">@item.ImportoViolazione €</div>
-            <div class="col">@item.Cognome</div>
-            <div class="col">@item.Nome</div>
-            <div class="col">@item.DataViolazione.ToShortDateString()</div>
-            <div class="col">@item.NumPunti</div>
+            <select id="tipoSelect">
+                <option value=1>Cognome</option>
+                <option value=2>Importo</option>
+                <option value=3>Data Violazione</option>
+            </select>
         </div>
-    }
+        <div class="col-2">
+
+            <input type="number" id="puntiInput" value="0" min="0" />
+        </div>
+        <div class="col">
+
+            <a href="#" class="btn btn-dark" id="sommarioLink">Ordina</a>
+
+        </div>
+
+    </div>
 </div>
 
+    <div class="container">
+        <div class="row mt-2 mb-3 fw-bold">
+            <div class="col ">Importo Verbale</div>
+            <div class="col">Cognome</div>
+            <div class="col">Nome</div>
+            <div class="col">Data Violazione</div>
+            <div class="col">Punti Decurtati</div>
+        </div>
+        <div class="tableConteiner">
+            @foreach (var item in ListaSommarioAnagrafe)
+            {
+                <div class="row p-2 tableRow">
+                    <div class="col">@item.ImportoViolazione €</div>
+                    <div class="col">@item.Cognome</div>
+                    <div class="col">@item.Nome</div>
+                    <div class="col">@item.DataViolazione.ToShortDateString()</div>
+                    <div class="col">@item.NumPunti</div>
+                </div>
+            }
+        </div>
+    </div>
 
-<script>
+
+
+    <script>
     // Funzione per aggiornare il link e l'elenco delle violazioni
     function updateSummary() {
         var tipo = document.getElementById('tipoSelect').value;
@@ -78,7 +83,7 @@
 
     // Esegui l'aggiornamento iniziale
     updateSummary();
-</script>
+    </script>
 
 
 

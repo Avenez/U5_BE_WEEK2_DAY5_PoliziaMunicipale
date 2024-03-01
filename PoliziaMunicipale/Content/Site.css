@@ -22,15 +22,17 @@ textarea {
 .tableConteiner {
 }
 
-.tableConteiner:nth-child(odd) {
-    background-color: lightgrey !important
+.tableConteiner > div:nth-child(odd) {
+        background-color: #cfcfd1
 }
 
 .tableRow {
-    cursor:pointer;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
 }
 
-.tabelRow:hover {
-    background-color:lightblue !important
-}
+    .tableRow:hover {
+        transition: 0.3s ease-in-out;
+        background-color: lightblue !important
+    }
 
