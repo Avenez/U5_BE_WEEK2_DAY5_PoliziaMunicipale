@@ -1,0 +1,85 @@
+﻿@model PoliziaMunicipale.Models.SommarioViolazioniAnagrafe
+@{
+    ViewBag.Title = "GetPuntiAnagrafica";
+    List<PoliziaMunicipale.Models.SommarioViolazioniAnagrafe> ListaSommarioAnagrafe = ViewBag.ListAnagrafe;
+}
+
+<h2>Sommario Violazioni per Angrafica</h2>
+<div class="row">
+    <div class="col"><h4>Seleziona Ordinamento</h4></div>
+    <div class="col"><h4>Filtro Punti</h4></div>
+    <div class="col"></div>
+</div>
+<div class="row">
+    <div class="col">
+        
+        <select id="tipoSelect">
+            <option value=1>Cognome</option>
+            <option value=2>Importo</option>
+            <option value=3>Data Violazione</option>
+        </select>
+    </div>
+    <div class="col">
+        
+        <input type="number" id="puntiInput" value="0" min="0" />
+    </div>
+    <div class="col">
+        
+        <a href="#" class="btn btn-dark" id="sommarioLink">Ordina</a>
+
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="row mt-2 mb-3 fw-bold">
+        <div class="col ">Importo Verbale</div>
+        <div class="col">Cognome</div>
+        <div class="col">Nome</div>
+        <div class="col">Data Violazione</div>
+        <div class="col">Punti Decurtati</div>
+    </div>
+    @foreach (var item in ListaSommarioAnagrafe)
+    {
+        <div class="row mb-2 border-1 border-bottom">
+            <div class="col">@item.ImportoViolazione €</div>
+            <div class="col">@item.Cognome</div>
+            <div class="col">@item.Nome</div>
+            <div class="col">@item.DataViolazione.ToShortDateString()</div>
+            <div class="col">@item.NumPunti</div>
+        </div>
+    }
+</div>
+
+
+<script>
+    // Funzione per aggiornare il link e l'elenco delle violazioni
+    function updateSummary() {
+        var tipo = document.getElementById('tipoSelect').value;
+        var punti = document.getElementById('puntiInput').value;
+        var link = document.getElementById('sommarioLink');
+        var listaSommario = document.getElementById('listaSommarioAnagrafe');
+
+        // Aggiorna l'URL del link
+        link.href = '@Url.Action("GetSommarioAnagrafe", "Verbale")?type=' + tipo + '&punti=' + punti;
+
+        // Effettua una richiesta AJAX per ottenere l'elenco aggiornato delle violazioni
+        fetch('@Url.Action("GetSommarioAnagrafePartial", "Verbale")?type=' + tipo + '&punti=' + punti)
+            .then(response => response.text())
+            .then(data => {
+                // Aggiorna l'elenco delle violazioni
+                listaSommario.innerHTML = data;
+            });
+    }
+
+    // Aggiungi eventi di cambio agli input
+    document.getElementById('tipoSelect').addEventListener('change', updateSummary);
+    document.getElementById('puntiInput').addEventListener('change', updateSummary);
+
+    // Esegui l'aggiornamento iniziale
+    updateSummary();
+</script>
+
+
+
+

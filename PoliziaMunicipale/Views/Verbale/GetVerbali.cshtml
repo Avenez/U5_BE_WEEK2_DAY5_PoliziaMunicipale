@@ -1,0 +1,86 @@
+﻿
+@model PoliziaMunicipale.Models.Verbale
+@{
+    ViewBag.Title = "GetVerbali";
+    List<PoliziaMunicipale.Models.Verbale> ListaVerbali = ViewBag.ListVerbali;
+}
+
+<h2 class="display-4">Sommario Violazioni per Angrafica</h2>
+<div class="border border-2 border-info rounded-2 p-2">
+    <div class="row mb-2 ">
+
+        <div class="col"><h4>Filtro Importo</h4></div>
+        <div class="col"></div>
+    </div>
+    <div class="row mb-4">
+
+        <div class="col-2">
+
+            <input type="number" id="importoInput" value="0" min="0" />
+        </div>
+        <div class="col">
+
+            <a href="#" class="btn btn-dark" id="sommarioLink">Filtra</a>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-2 mb-3 fw-bold">
+        <div class="col-1">Id</div>
+        <div class="col">Data Violazione</div>
+        <div class="col-3">Indirizzo</div>
+        <div class="col-2">Agente</div>
+        <div class="col">Data Verbale</div>
+        <div class="col">Importo</div>
+        <div class="col">Punti Decurtati</div>
+        <div class="col">Id Anagrafica</div>
+        <div class="col">Id Violazione</div>
+    </div>
+    <div class="tableConteiner">
+        @foreach (var item in ListaVerbali)
+        {
+            <div class="row mb-3 border-1 border-bottom tableRow">
+                <div class="col-1">@item.IdVerbale</div>
+                <div class="col">@item.DataViolazione.ToShortDateString()</div>
+                <div class="col-3">@item.IndirizzoViolazione</div>
+                <div class="col-2">@item.NominativoAgente</div>
+                <div class="col">@item.DataTrascrizioneVerbale.ToShortDateString()</div>
+                <div class="col">@((double)item.Importo) €</div>
+                <div class="col">@item.DecurtamentoPunti</div>
+                <div class="col">@item.IdAnagrafica</div>
+                <div class="col">@item.IdViolazione</div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<script>
+    // Funzione per aggiornare il link e l'elenco delle violazioni
+    function updateSummary() {
+        //var tipo = document.getElementById('tipoSelect').value;
+        var punti = document.getElementById('importoInput').value;
+        var link = document.getElementById('sommarioLink');
+        var listaSommario = document.getElementById('ListaVerbali');
+
+        // Aggiorna l'URL del link
+        link.href = '@Url.Action("GetVerbali", "Verbale")?importo=' + punti
+
+        // Effettua una richiesta AJAX per ottenere l'elenco aggiornato delle violazioni
+        fetch('@Url.Action("GetSommarioAnagrafePartial", "Verbale")?importo=' + punti)
+            .then(response => response.text())
+            .then(data => {
+                // Aggiorna l'elenco delle violazioni
+                listaSommario.innerHTML = data;
+            });
+    }
+
+    // Aggiungi eventi di cambio agli input
+    document.getElementById('importoInput').addEventListener('change', updateSummary);
+
+    // Esegui l'aggiornamento iniziale
+    updateSummary();
+</script>

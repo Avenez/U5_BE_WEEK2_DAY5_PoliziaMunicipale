@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var feedBack = Session["Messaggio"];
+    bool inserimento = (bool)TempData["Inserimento"];
+}
+
+<main>
+    <div id="alert" class="alert alert-info @((inserimento == true ? "d-block" : "d-none" )) " role="alert" >
+        @feedBack
+    </div>
+    <h1 class="display-1 text-info">POLIZIA MUNICIPALE</h1>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="display-2">Inserimento</h2>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        @Html.ActionLink("Inserimento Anagrafica", "CreateAnagrafica", "Anagrafica", new { area = "" }, new { @class = "btn btn-dark w-100" })
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        @Html.ActionLink("Inserimento Verbale", "CreateVerbale", "Verbale", new { area = "" }, new { @class = "btn btn-dark w-100" })
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        @Html.ActionLink("Elenco Infrazioni", "CreateViolazione", "TipoDiViolazione", new { area = "" }, new { @class = "btn btn-dark w-100" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script>
+    // Verifica se c'è un feedback da mostrare e mostra l'alert se presente
+    var alertDiv = document.getElementById('alert');
+    if (alertDiv.classList.contains('d-block')) {
+        setTimeout(function () {
+            alertDiv.classList.remove('d-none');
+            alertDiv.classList.add('d-none'); // Rimuovi la classe per nascondere l'alert dopo 4 secondi
+        }, 4000);
+    }
+</script>

@@ -1,0 +1,41 @@
+﻿
+@model PoliziaMunicipale.Models.SommarioViolazioniAnagrafe
+@{
+    ViewBag.Title = "GetPuntiAnagrafica";
+    int order2 = ViewBag.Order2;
+    List<PoliziaMunicipale.Models.SommarioViolazioniAnagrafe> ListaSommarioPunti = ViewBag.ListPuntiAnagrafe;
+}
+
+<h2 class="display-4">Sommario Punti per Angrafica</h2>
+
+@if (order2 == 1)
+{
+    @Html.ActionLink("Ordine Ascendente", "GetPuntiAnagrafica", "Verbale", new { order2 = 0 }, new { @class = "btn btn-dark" })
+}
+else
+{
+    @Html.ActionLink("Ordine Discendente", "GetPuntiAnagrafica", "Verbale", new { order2 = 1 }, new { @class = "btn btn-dark" })
+}
+
+
+
+
+<div class="container mt-4">
+    <div class="row mb-2 fw-bold">
+        <div class="col">Id Anagrafica</div>
+        <div class="col">Nome</div>
+        <div class="col">Cognome</div>
+        <div class="col">CF</div>
+        <div class="col">Totali Punti</div>
+    </div>
+    @foreach (var item in ListaSommarioPunti)
+    {
+        <div class="row mb-3 border-1 border-bottom tableRow">
+            <div class="col">@item.IdAnagrafica</div>
+            <div class="col">@item.Nome</div>
+            <div class="col">@item.Cognome</div>
+            <div class="col">@item.Cod_Fisc</div>
+            <div class="col">@item.NumPunti</div>
+        </div>
+    }
+</div>

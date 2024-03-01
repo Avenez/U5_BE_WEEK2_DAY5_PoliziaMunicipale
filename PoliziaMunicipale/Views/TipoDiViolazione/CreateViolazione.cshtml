@@ -1,0 +1,89 @@
+﻿@model TipoViolazione
+
+@{
+    ViewBag.Title = "CreateViolazione";
+    List<TipoViolazione> Violazioni = ViewBag.listViolazioni;
+}
+
+<h2 class="display-5">Elenco Violazioni</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal container">
+
+    <hr />
+    <h4>Aggiungi Violazione</h4>
+    <div class="row fw-bold p-2 border border-2 border-info rounded-2 mb-3">
+         
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descrizione, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descrizione, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descrizione, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contestabile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Contestabile)
+                    @Html.ValidationMessageFor(model => model.Contestabile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-12 mt-2 mb-3">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-info mt-3 w-100" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            ID Violazione
+        </div>
+        <div class="col">
+            Violazione
+        </div>
+        <div class="col">
+            Contestabile
+        </div>
+    </div>
+    @foreach (var violazione in Violazioni)
+    {
+
+        <div class="row mb-3 border-1 border-bottom ">
+            <div class="col">
+                @violazione.IdViolazione
+            </div>
+            <div class="col">
+                @violazione.Descrizione
+            </div>
+            <div class="col">
+                <input type="checkbox" name="checkbox" value="" @((violazione.Contestabile ? "checked" : "")) disabled />
+            </div>
+
+        </div>
+
+
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

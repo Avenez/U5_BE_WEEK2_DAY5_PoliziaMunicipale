@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Recupero Dati";
+}
+
+<main>
+    <h1 class="display-1 text-info">POLIZIA MUNICIPALE</h1>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="display-2">Recupero Dati</h2>
+                <div class="row mt-3" >
+                    <div class="col-5">
+                        @Html.ActionLink("Totale Verbali", "GetVerbaliAnagrafica", "Verbale", new { order = 1 }, new { @class = "btn btn-dark w-100" })
+                    </div>
+                </div>
+                <div class="row mt-3" >
+                    <div class="col-5">
+                        @Html.ActionLink("Totale Punti", "GetPuntiAnagrafica", "Verbale", new { order2 = 1 }, new { @class = "btn btn-dark w-100" })
+                    </div>
+                </div>
+                <div class="row mt-3" ">
+                    <div class="col-5">
+                        @Html.ActionLink("Violazioni", "GetSommarioAnagrafe", "Verbale", new { type = 1, punti = 2 }, new { @class = "btn btn-dark w-100" })
+                    </div>
+                </div>
+
+                <div class="row mt-3" >
+                    <div class="col-5">
+                        @Html.ActionLink("Elenco Verbali", "GetVerbali", "Verbale", new { importo = 0 }, new { @class = "btn btn-dark w-100" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+

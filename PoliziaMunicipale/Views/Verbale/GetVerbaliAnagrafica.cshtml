@@ -1,0 +1,40 @@
+﻿@model PoliziaMunicipale.Models.SommarioViolazioniAnagrafe
+@{
+    ViewBag.Title = "GetVerbaliAnagrafica";
+    int order = ViewBag.Order;
+    List<PoliziaMunicipale.Models.SommarioViolazioniAnagrafe> ListaSommarioViolazioni = ViewBag.ListViolazioniAnagrafe;
+}
+
+<h2 class="display-4">Sommario Violazioni per Angrafica</h2>
+
+@if (order == 1)
+{
+    @Html.ActionLink("Ordine Ascendente", "GetVerbaliAnagrafica", "Verbale", new { order = 0 }, new { @class = "btn btn-dark" })
+}
+else
+{
+    @Html.ActionLink("Ordine Discendente", "GetVerbaliAnagrafica", "Verbale", new { order = 1 }, new { @class = "btn btn-dark" })
+}
+
+
+
+
+<div class="container">
+    <div class="row mt-2 mb-3 fw-bold">
+        <div class="col">Id Anagrafica</div>
+        <div class="col">Nome</div>
+        <div class="col">Cognome</div>
+        <div class="col">CF</div>
+        <div class="col">Totali verbali</div>
+    </div>
+    @foreach (var item in ListaSommarioViolazioni)
+    {
+        <div class="row mb-3 border-1 border-bottom">
+            <div class="col">@item.IdAnagrafica</div>
+            <div class="col">@item.Nome</div>
+            <div class="col">@item.Cognome</div>
+            <div class="col">@item.Cod_Fisc</div>
+            <div class="col">@item.NumVerbali</div>
+        </div>
+    }
+</div>
