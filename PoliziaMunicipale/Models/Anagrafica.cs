@@ -30,11 +30,12 @@ namespace PoliziaMunicipale.Models
         public string Citta { get; set; }
 
         [Required]
-        [StringLength(16)]
+        
         [Display(Name = "CAP")]
         public string CAP { get; set; }
 
         [Required]
+        [StringLength(16)]
         [Display(Name = "Codice Fiscale")]
         public string CodiceFiscale { get; set; }
 
